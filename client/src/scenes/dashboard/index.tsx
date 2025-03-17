@@ -1,8 +1,7 @@
 import { Box, useMediaQuery, useTheme } from '@mui/material'
-import DashboardBox from '@/components/DashboardBox';
-import React from 'react'
 import Row1 from './Row1';
 import Row2 from './Row2';
+import Row3 from './Row3';
 
 type Props = {}
  
@@ -49,7 +48,7 @@ const gridTemplateSmallScreens =`
 "j"
 `;
 
-const index = (props: Props) => {
+const Dashboard = (props: Props) => {
     const { palette } = useTheme();
     const isAboveMediumScreens = useMediaQuery("(min-width: 1200px)");
   return (
@@ -64,14 +63,11 @@ const index = (props: Props) => {
     gridTemplateAreas: gridTemplateSmallScreens,
    }}
    >
-    <Row1/>
+   <Row1/>
    <Row2/>
-   <DashboardBox bgcolor="#fff" gridArea="g" ></DashboardBox>
-   <DashboardBox bgcolor="#fff" gridArea="h" ></DashboardBox>
-   <DashboardBox bgcolor="#fff" gridArea="i" ></DashboardBox>
-   <DashboardBox bgcolor="#fff" gridArea="j" ></DashboardBox>
+   <Row3/>
    </Box>
   )
 }
 
-export default index
+export default Dashboard
