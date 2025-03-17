@@ -13,7 +13,7 @@ const index = (props: Props) => {
     <FlexBetween mb="0.25rem" p = "0.5rem 0rem" color={palette.grey[300]}>
     <FlexBetween gap="0.75rem">
         <WebhookIcon sx={{fontSize : "28px"}}/>
-        <Typography variant="h4" fontSize="16px">Finanseer</Typography>
+        <Typography variant="h4" fontSize="16px">FinTrack</Typography>
     </FlexBetween>
     <FlexBetween gap="2rem">
         <Box sx= {{"$:hover":{color: palette.primary[100]}}}>
