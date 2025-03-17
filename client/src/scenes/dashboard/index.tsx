@@ -2,6 +2,7 @@ import { Box, useMediaQuery, useTheme } from '@mui/material'
 import DashboardBox from '@/components/DashboardBox';
 import React from 'react'
 import Row1 from './Row1';
+import Row2 from './Row2';
 
 type Props = {}
  
@@ -64,9 +65,7 @@ const index = (props: Props) => {
    }}
    >
     <Row1/>
-   <DashboardBox bgcolor="#fff" gridArea="d" ></DashboardBox>
-   <DashboardBox bgcolor="#fff" gridArea="e" ></DashboardBox>
-   <DashboardBox bgcolor="#fff" gridArea="f" ></DashboardBox>
+   <Row2/>
    <DashboardBox bgcolor="#fff" gridArea="g" ></DashboardBox>
    <DashboardBox bgcolor="#fff" gridArea="h" ></DashboardBox>
    <DashboardBox bgcolor="#fff" gridArea="i" ></DashboardBox>
