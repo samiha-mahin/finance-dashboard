@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
+import connectDB from "./utils/db.js"
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -16,4 +17,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
-console.log("hello world")
+const PORT = process.env.PORT || 3000;
+ app.listen (PORT,()=>{
+    connectDB();
+    console.log(`Server Running at Port ${PORT}`);
+ });
