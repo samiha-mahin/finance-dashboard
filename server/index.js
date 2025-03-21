@@ -7,6 +7,7 @@ import morgan from "morgan";
 import connectDB from "./utils/db.js"
 import kpiRoutes from "./routes/kpi_route.js"
 
+
 /* CONFIGURATIONS */
 dotenv.config();
 const app = express();
