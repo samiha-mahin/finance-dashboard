@@ -6,6 +6,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 import connectDB from "./utils/db.js"
 import kpiRoutes from "./routes/kpi_route.js"
+import { kpis, products, transactions } from "./data/data.js";
+
 
 
 /* CONFIGURATIONS */
