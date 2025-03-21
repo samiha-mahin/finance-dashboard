@@ -1,4 +1,4 @@
-import { KPI } from "../models/kpi_model";
+import { KPI } from "../models/kpi_model.js";
 
 export const kpiController = async (req,res)=>{
     try {
