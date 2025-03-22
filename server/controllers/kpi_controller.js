@@ -1,16 +1,18 @@
-import { KPI } from "../models/kpi_model.js";
+// controllers/kpi_controller.js
+import { kpis } from "../data/data.js"; // Import the static data from data.js
 
 export const kpiController = async (req, res) => {
     try {
+        // Set headers to avoid caching
         res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
         res.setHeader("Expires", "0");
         res.setHeader("Pragma", "no-cache");
 
-        const kpis = await KPI.find();
-        res.status(200).json(kpis);
+        // Return the static data from data.js
+        res.status(200).json(kpis); // Return the static data as JSON response
     } catch (error) {
         return res.status(500).json({
-            message: error.message,
+            message: error.message, // Return error if something goes wrong
         });
     }
 };

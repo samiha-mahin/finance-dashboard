@@ -5,62 +5,70 @@ import { useTheme } from "@mui/material";
 import { useMemo } from "react";
 import {
   ResponsiveContainer,
-  CartesianGrid,
   AreaChart,
-  BarChart,
-  Bar,
-  LineChart,
+  Area,
   XAxis,
   YAxis,
+  Tooltip,
+  Bar,
+  LineChart,
+  CartesianGrid,
   Legend,
   Line,
-  Tooltip,
-  Area,
+  BarChart,
 } from "recharts";
 
 const Row1 = () => {
   const { palette } = useTheme();
   const { data } = useGetKpisQuery();
 
-
-  // Fixing the data to ensure it exists and is structured correctly
-  const monthlyData = data?.[0]?.monthlyData || [];
-
   const revenue = useMemo(() => {
-    return monthlyData.map(({ month, revenue }) => {
-      return {
+    return (
+      data &&
+      data[0].monthlyData.map(({ month, revenue }) => ({
         name: month.substring(0, 3),
-        revenue: revenue,
-      };
-    });
-  }, [monthlyData]);
+        revenue: parseFloat(revenue.replace('$', '').replace(',', '')), // Convert revenue to number
+      }))
+    );
+  }, [data]);
 
   const revenueExpenses = useMemo(() => {
-    return monthlyData.map(({ month, revenue, expenses }) => {
-      return {
+    return (
+      data &&
+      data[0].monthlyData.map(({ month, revenue, expenses }) => ({
         name: month.substring(0, 3),
-        revenue: revenue,
-        expenses: expenses,
-      };
-    });
-  }, [monthlyData]);
+        revenue: parseFloat(revenue.replace('$', '').replace(',', '')), // Convert to number
+        expenses: parseFloat(expenses.replace('$', '').replace(',', '')), // Convert to number
+      }))
+    );
+  }, [data]);
 
   const revenueProfit = useMemo(() => {
-    return monthlyData.map(({ month, revenue, expenses }) => {
-      return {
-        name: month.substring(0, 3),
-        revenue: revenue,
-        profit: (revenue - expenses).toFixed(2),
-      };
-    });
-  }, [monthlyData]);
+    return (
+      data &&
+      data[0].monthlyData.map(({ month, revenue, expenses }) => {
+        const revenueAmount = parseFloat(revenue.replace('$', '').replace(',', ''));
+        const expensesAmount = parseFloat(expenses.replace('$', '').replace(',', ''));
+
+        return {
+          name: month.substring(0, 3),
+          revenue: revenueAmount,
+          profit: (revenueAmount - expensesAmount).toFixed(2),
+        };
+      })
+    );
+  }, [data]);
+
+  if (!revenue || !revenueExpenses || !revenueProfit) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
-      <DashboardBox gridArea="a">
+     <DashboardBox gridArea="a">
         <BoxHeader
           title="Revenue and Expenses"
-          subtitle="Top line represents revenue, bottom line represents expenses"
+          subtitle="top line represents revenue, bottom line represents expenses"
           sideText="+4%"
         />
         <ResponsiveContainer width="100%" height="100%">
@@ -132,10 +140,10 @@ const Row1 = () => {
           </AreaChart>
         </ResponsiveContainer>
       </DashboardBox>
-      <DashboardBox gridArea="b">
+    <DashboardBox gridArea="b">
         <BoxHeader
           title="Profit and Revenue"
-          subtitle="Top line represents revenue, bottom line represents profit"
+          subtitle="top line represents revenue, bottom line represents expenses"
           sideText="+4%"
         />
         <ResponsiveContainer width="100%" height="100%">
@@ -194,7 +202,7 @@ const Row1 = () => {
       <DashboardBox gridArea="c">
         <BoxHeader
           title="Revenue Month by Month"
-          subtitle="Graph representing the revenue month by month"
+          subtitle="graph representing the revenue month by month"
           sideText="+4%"
         />
         <ResponsiveContainer width="100%" height="100%">
