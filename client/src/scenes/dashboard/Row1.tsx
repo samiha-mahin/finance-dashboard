@@ -22,50 +22,45 @@ const Row1 = () => {
   const { palette } = useTheme();
   const { data } = useGetKpisQuery();
 
+
+  // Fixing the data to ensure it exists and is structured correctly
+  const monthlyData = data?.[0]?.monthlyData || [];
+
   const revenue = useMemo(() => {
-    return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue }) => {
-        return {
-          name: month.substring(0, 3),
-          revenue: revenue,
-        };
-      })
-    );
-  }, [data]);
+    return monthlyData.map(({ month, revenue }) => {
+      return {
+        name: month.substring(0, 3),
+        revenue: revenue,
+      };
+    });
+  }, [monthlyData]);
 
   const revenueExpenses = useMemo(() => {
-    return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => {
-        return {
-          name: month.substring(0, 3),
-          revenue: revenue,
-          expenses: expenses,
-        };
-      })
-    );
-  }, [data]);
+    return monthlyData.map(({ month, revenue, expenses }) => {
+      return {
+        name: month.substring(0, 3),
+        revenue: revenue,
+        expenses: expenses,
+      };
+    });
+  }, [monthlyData]);
 
   const revenueProfit = useMemo(() => {
-    return (
-      data &&
-      data[0].monthlyData.map(({ month, revenue, expenses }) => {
-        return {
-          name: month.substring(0, 3),
-          revenue: revenue,
-          profit: (revenue - expenses).toFixed(2),
-        };
-      })
-    );
-  }, [data]);
+    return monthlyData.map(({ month, revenue, expenses }) => {
+      return {
+        name: month.substring(0, 3),
+        revenue: revenue,
+        profit: (revenue - expenses).toFixed(2),
+      };
+    });
+  }, [monthlyData]);
 
   return (
     <>
       <DashboardBox gridArea="a">
         <BoxHeader
           title="Revenue and Expenses"
-          subtitle="top line represents revenue, bottom line represents expenses"
+          subtitle="Top line represents revenue, bottom line represents expenses"
           sideText="+4%"
         />
         <ResponsiveContainer width="100%" height="100%">
@@ -140,7 +135,7 @@ const Row1 = () => {
       <DashboardBox gridArea="b">
         <BoxHeader
           title="Profit and Revenue"
-          subtitle="top line represents revenue, bottom line represents expenses"
+          subtitle="Top line represents revenue, bottom line represents profit"
           sideText="+4%"
         />
         <ResponsiveContainer width="100%" height="100%">
@@ -199,7 +194,7 @@ const Row1 = () => {
       <DashboardBox gridArea="c">
         <BoxHeader
           title="Revenue Month by Month"
-          subtitle="graph representing the revenue month by month"
+          subtitle="Graph representing the revenue month by month"
           sideText="+4%"
         />
         <ResponsiveContainer width="100%" height="100%">
