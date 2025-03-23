@@ -8,7 +8,7 @@ export const productController = async (req, res) => {
         res.setHeader("Pragma", "no-cache");
 
         // Return the static data from data.js
-        res.status(200).json(productController); // Return the static data as JSON response
+        res.status(200).json(products); // Return the static data as JSON response
     } catch (error) {
         return res.status(500).json({
             message: error.message, // Return error if something goes wrong
