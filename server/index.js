@@ -6,6 +6,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import connectDB from "./utils/db.js"
 import kpiRoutes from "./routes/kpi_route.js"
+import productRoutes from "./routes/product_route.js"
 
 
 
@@ -22,6 +23,7 @@ app.use(cors());
 
 /* ROUTES */
 app.use("/kpi", kpiRoutes);
+app.use("/product", productRoutes);
 
 const PORT = process.env.PORT || 3000;
  app.listen (PORT,()=>{
