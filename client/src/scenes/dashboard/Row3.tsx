@@ -28,7 +28,7 @@ const Row3 = () => {
     const expensesByCategory = kpiData[0]?.expensesByCategory || {};
 
     return Object.entries(expensesByCategory).map(([key, value]) => [
-      { name: key, value: value },
+      { name: key, value: totalExpenses - value },
       { name: `${key} of Total`, value: parseFloat(value?.toString().replace(/[$,]/g, "") || "0") },
     ]);
   }, [kpiData]);
@@ -121,15 +121,15 @@ const Row3 = () => {
       <DashboardBox gridArea="i">
         <BoxHeader title="Expense Breakdown By Category" sideText="+4%" />
         <FlexBetween mt="0.5rem" gap="0.5rem" p="0 1rem" textAlign="center">
-          {pieChartData.map((data, i) => (
+          {pieChartData?.map((data, i) => (
             <Box key={`${data[0].name}-${i}`}>
-              <PieChart width={110} height={100}>
+              <PieChart width={80} height={70}>
                 <Pie
                   stroke="none"
                   data={data}
-                  innerRadius={18}
-                  outerRadius={35}
-                  paddingAngle={2}
+                  innerRadius={15}
+                  outerRadius={30}
+                  paddingAngle={5}
                   dataKey="value"
                 >
                   {data.map((entry, index) => (
