@@ -22,12 +22,14 @@ const Row3 = () => {
   const pieChartData = useMemo(() => {
     if (!kpiData || kpiData.length === 0) return [];
 
-    const totalExpenses = kpiData[0]?.totalExpenses || 0;
+    const totalExpenses = parseFloat(
+      kpiData[0]?.totalExpenses?.toString().replace(/[$,]/g, "") || "0"
+    );
     const expensesByCategory = kpiData[0]?.expensesByCategory || {};
 
     return Object.entries(expensesByCategory).map(([key, value]) => [
       { name: key, value: value },
-      { name: `${key} of Total`, value: totalExpenses - value },
+      { name: `${key} of Total`, value: parseFloat(value?.toString().replace(/[$,]/g, "") || "0") },
     ]);
   }, [kpiData]);
 
