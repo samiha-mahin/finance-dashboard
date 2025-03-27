@@ -22,25 +22,41 @@ const Predictions = () => {
   const { data: kpiData } = useGetKpisQuery();
 
   const formattedData = useMemo(() => {
-    if (!kpiData) return [];
+    if (!kpiData || !kpiData.length || !kpiData[0].monthlyData) return [];
+  
     const monthData = kpiData[0].monthlyData;
-
-    const formatted: Array<DataPoint> = monthData.map(
-      ({ revenue }, i: number) => {
-        return [i, revenue];
-      }
-    );
+  
+    // Ensure revenue is properly parsed as a number
+    const formatted: Array<DataPoint> = monthData
+      .map(({ revenue }, i: number) => {
+        const revenueNum =
+          typeof revenue === "string"
+            ? parseFloat(revenue.replace("$", "").replace(",", ""))
+            : revenue;
+  
+        return !isNaN(revenueNum) ? [i, revenueNum] : null; // Filter out invalid values
+      })
+      .filter((point): point is DataPoint => point !== null);
+  
+    if (!formatted.length) return [];
+  
     const regressionLine = regression.linear(formatted);
-
+  
     return monthData.map(({ month, revenue }, i: number) => {
+      const revenueNum =
+        typeof revenue === "string"
+          ? parseFloat(revenue.replace("$", "").replace(",", ""))
+          : revenue;
+  
       return {
-        name: month,
-        "Actual Revenue": revenue,
-        "Regression Line": regressionLine.points[i][1],
-        "Predicted Revenue": regressionLine.predict(i + 12)[1],
+        name: month.substring(0, 3), // Shorten month name
+        "Actual Revenue": revenueNum,
+        "Regression Line": regressionLine.points[i]?.[1] ?? null,
+        "Predicted Revenue": regressionLine.predict(i + 12)?.[1] ?? null,
       };
-    });
+    }).filter(data => data["Actual Revenue"] !== null); // Ensure valid data
   }, [kpiData]);
+  
 
   return (
     <DashboardBox width="100%" height="100%" p="1rem" overflow="hidden">
