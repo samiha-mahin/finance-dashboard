@@ -8,4 +8,4 @@ const index = (props: Props) => {
   )
 }
 
-export default indexrafce
+export default index
