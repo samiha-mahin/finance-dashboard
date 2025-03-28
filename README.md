@@ -70,7 +70,7 @@ PORT=5000
 1. Start the backend server  
    ```bash
    cd server
-   npm start
+   npm run dev
    ```
 2. Run the frontend  
    ```bash
