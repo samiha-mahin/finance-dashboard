@@ -19,7 +19,8 @@ Excited to share my latest project—a **Finance Dashboard App** that’s fully 
 - 🛢 **MongoDB** – NoSQL database  
 
 ### Machine Learning:  
-- 🤖 **Expense Prediction Model** – Regression-based ML model to predict future expenses  
+- 🤖 **Expense Prediction Model** – Regression-based ML model to predict future expenses
+- **Link For Regression Model** - https://github.com/Tom-Alexander/regression-js.git 
 
 ## 🎯 Features  
 ✅ **Expense Predictions** – AI-powered forecasting using ML  
