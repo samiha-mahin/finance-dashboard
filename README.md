@@ -1,4 +1,4 @@
-
+![Screenshot (231)](https://github.com/user-attachments/assets/eab63d7b-eecf-4457-b96e-7ac95f0b5bfa)
 # 📊 Finance Dashboard App with Machine Learning Predictions  
 
 🚀 **Just Built a Responsive MERN Finance Dashboard with Machine Learning Predictions!**  
