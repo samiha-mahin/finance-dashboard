@@ -50,7 +50,7 @@ npm run dev
 ```bash
 cd server
 npm install
-npm start
+npm run dev
 ```
 
 ### 3️⃣ Set Up Environment Variables  
