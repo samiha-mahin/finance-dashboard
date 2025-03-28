@@ -52,7 +52,11 @@ cd server
 npm install
 npm run dev
 ```
-
+#### **Machine Learning:**  
+```bash
+cd client
+npm install --save regression
+```
 ### 3️⃣ Set Up Environment Variables  
 Create a `.env` file in the `server` directory and add:  
 ```env
